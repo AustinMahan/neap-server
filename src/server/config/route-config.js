@@ -7,6 +7,8 @@
     // *** routes *** //
     const routes = require('../routes/index');
     const coffee = require('../routes/coffee');
+    
+    app.use(crossOrigin)
 
     // *** register routes *** //
     app.use('/', routes);
@@ -15,3 +17,9 @@
   };
 
 })(module.exports);
+
+
+function crossOrigin(req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin','*');
+  next()
+}
