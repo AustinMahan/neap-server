@@ -11,7 +11,7 @@ module.exports = {
       directory: __dirname + '/src/server/db/seeds'
     }
   },
-  product: {
+  production: {
     client: 'postgresql',
     connection: process.env.DATABASE_URL,
     migrations: {
