@@ -18,7 +18,7 @@ function addOne(body) {
     origin: body.origin || '',
     quantity: body.quantity || 0,
     price: body.price || 0
-  })
+  }).returning('*')
 }
 
 module.exports = {
