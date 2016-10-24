@@ -17,8 +17,9 @@ router.get('/:id', function (req, res, next) {
 });
 
 router.post('/', function (req, res, next) {
+  console.log('hit');
   addOne(req.body)
-  .then(() => res.status(201).send('ok'))
+  .then(() => { console.log('end'); res.status(201).send('ok')})
 })
 
 module.exports = router;

@@ -10,14 +10,14 @@ function getWhere(table, col, val) {
 
 function addOne(body) {
   return knex('coffeee').insert({
-    name: body.name,
+    name: body.name || '',
     decaf: body.decaf || false,
-    caffeine: body.caffeine,
-    roast: body.roast,
-    roaster: body.roaster,
-    origin: body.origin,
-    quantity: body.quantity,
-    price: body.price
+    caffeine: body.caffeine  || 0,
+    roast: body.roast || '',
+    roaster: body.roaster || '',
+    origin: body.origin || '',
+    quantity: body.quantity || 0,
+    price: body.price || 0
   })
 }
 
