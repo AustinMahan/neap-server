@@ -19,7 +19,7 @@ router.get('/:id', function (req, res, next) {
 router.post('/', function (req, res, next) {
   console.log('hit');
   addOne(req.body)
-  .then(() => { console.log('end'); res.status(201).send()})
+  .then((data) => { console.log('end'); res.status(201).send(data)})
 })
 
 module.exports = router;
