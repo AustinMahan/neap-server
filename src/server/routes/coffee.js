@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { getAll, getWhere } = require('../queries/coffees');
+const { getAll, getWhere, addOne } = require('../queries/coffees');
 const indexController = require('../controllers/index');
 
 router.get('/', function (req, res, next) {
@@ -15,5 +15,10 @@ router.get('/:id', function (req, res, next) {
   .then(data => res.send(data))
   .catch(err => res.status(500).send(err))
 });
+
+router.post('/', function (req, res, next) {
+  addOne(req.body)
+  .then(() => res.send('ok'))
+})
 
 module.exports = router;
