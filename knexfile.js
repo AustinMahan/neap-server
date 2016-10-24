@@ -1,4 +1,4 @@
-const databaseName = 'node_token_auth';
+const databaseName = 'coffeeWarmup';
 
 module.exports = {
   development: {
