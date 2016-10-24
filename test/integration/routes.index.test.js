@@ -6,10 +6,15 @@ const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 
 const server = require('../../src/server/app');
+const knex = require('../../src/server/db/connection');
 
 describe('routes : index', () => {
 
-  beforeEach((done) => { done(); });
+  beforeEach(() => {
+   return knex.migrate.rollback()
+   .then(() => { return knex.migrate.latest(); })
+   .then(() => { return knex.seed.run(); });
+ });
 
   afterEach((done) => { done(); });
 
@@ -28,18 +33,26 @@ describe('routes : index', () => {
     });
   });
 
-  describe('GET /404', () => {
-    it('should throw an error', (done) => {
+  describe('GET /coffee', () => {
+    it('should render a success', (done) => {
       chai.request(server)
-      .get('/404')
+      .get('/coffee')
       .end((err, res) => {
-        res.redirects.length.should.equal(0);
-        res.status.should.equal(404);
-        res.type.should.equal('application/json');
-        res.body.message.should.eql('Not Found');
-        done();
+        return knex('coffeee').where('id', 1).first()
+        .then((coffee) => {
+          res.redirects.length.should.equal(0);
+          res.status.should.eql(200);
+          res.type.should.eql('application/json');
+          // res.body.should.contain.keys('status', 'data');
+          // res.body.status.should.eql('success');
+          res.body.should.be.a('array');
+          res.body.length.should.eql(5);
+          res.body[0].id.should.eql(coffee.id);
+          done();
+        });
       });
     });
   });
+
 
 });
