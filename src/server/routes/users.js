@@ -10,6 +10,12 @@ router.get('/', function (req, res, next) {
   .then(data => res.send(data))
 })
 
+router.get('/status', ensureAuthenticated, (req, res, next) => {
+  res.json({
+    status: 'A ok'
+  })
+})
+
 router.post('/login', function (req, res, next) {
   const username = req.body.username
   const password = req.body.password

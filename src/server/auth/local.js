@@ -1,6 +1,9 @@
 const jwt = require('jwt-simple');
+const knex = require('../db/connection');
 var uuid = require('uuid');
 require('dotenv')
+var { getAll, getWhere } = require('../queries/coffees.js');
+
 const moment = require('moment');
 
 const SECRET = 'process.env.SECRET_KEY'
@@ -20,8 +23,8 @@ function decodeToken(token) {
   var payload = jwt.decode(token, SECRET)
   if(payload.exp < now) return false;
   else{
-    return getWhere('users', 'id', payload.sub)
-    .then(data => data.length > 0)
+    return knex('users').where('id', payload.sub)
+    .then(data => data)
   }
 }
 

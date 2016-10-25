@@ -45,7 +45,8 @@ function ensureAuthenticated(req, res, next) {
       status: "Add some headers"
     })
   }
-  var bool = local.decodeToken(req.headers.token.split(' ')[1])
+  var bool = local.decodeToken(req.headers.authorization)
+  console.log('hit');
   if (bool) next()
   else {
     res.status(401).json({
