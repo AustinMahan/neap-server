@@ -7,12 +7,14 @@
     // *** routes *** //
     const routes = require('../routes/index');
     const coffee = require('../routes/coffee');
+    const user = require('../routes/users');
 
     app.use(crossOrigin)
 
     // *** register routes *** //
     app.use('/', routes);
     app.use('/coffee', coffee);
+    app.use('/user', user);
 
   };
 
